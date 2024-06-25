@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromatography</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        html {
+            font-size: 20px;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            overflow-x: hidden;
+            margin: 0;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 10vh;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .full-page {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0, 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 2rem;
+            padding: 8rem 4rem;
+        }
+        .image-item {
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 100%;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .image-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .image-item:hover img {
+            transform: scale(1.05);
+        }
+        .carousel {
+            backdrop-filter: blur(10px);
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+        }
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            display: flex;
+            justify-content: center;
+
+        }
+        .carousel-image {
+            max-width: 100%;
+            max-height: 100%;
+            height: 90vh;
+            object-fit: contain;
+        }
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            padding: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-prev:hover, .carousel-next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .carousel-prev { left: 20px; }
+        .carousel-next { right: 20px; }
+        .carousel-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .carousel-close:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .lens-flare {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.5;
+            mix-blend-mode: soft-light;
+            transition: transform 0.1s ease;
+        }
+        .hero {
+            font-size: clamp(1rem, 5vw, 5rem);
+        }
+        .rainbow-text {
+            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: rainbow 6s linear infinite;
+        }
+        @keyframes rainbow {
+            to {
+                background-position: 200% center;
+            }
+        }
+        .rainbow-border {
+            position: relative;
+        }
+        .rainbow-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.5;
+            border-radius: 17px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <main>
+        <section class="full-page">
+            <h1 class="text-6xl font-bold mb-8 text-gray-800 rainbow-text">Chromatography</h1>
+            <p class="text-xl text-gray-600 max-w-3xl relative z-10">
+                Nature Through a Chromatic Lens            </p>
+            <p class="text-xl text-gray-600 max-w-3xl relative z-10">
+                Welcome to Chromatography, where nature meets artistry. Our gallery showcases stunning plant photography enhanced with chromatic filters, creating a mesmerizing interplay of light and color. Each image captures the intricate details of flora, transformed into vibrant, dreamlike compositions that blur the line between reality and imagination.
+            </p>
+        </section>
+
+        
+        <nav class="navbar">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <div class="text-2xl font-bold rainbow-text">Chromatography</div>
+                    <div class="space-x-4">
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">Home</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">Gallery</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">About</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="image-grid">
+            <div class="image-item rainbow-border">
+                <img src="assets/1.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/2.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/3.jpg" alt="Chromatic plant photo 2" onclick="openCarousel(1)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/4.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/5.jpg" alt="Chromatic plant photo 3" onclick="openCarousel(2)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/6.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/7.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/8.jpg" alt="Chromatic plant photo 4" onclick="openCarousel(3)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/9.jpg" alt="Chromatic plant photo 5" onclick="openCarousel(4)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/10.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/11.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/12.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/13.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/14.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/15.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/16.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/20.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/21.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/22.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/24.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/25.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/26.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+            <div class="image-item rainbow-border">
+                <img src="assets/27.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+            </div>
+        </div>
+    </main>
+
+    <div id="carousel" class="carousel">
+        <div class="carousel-content">
+            <img id="carousel-image" class="carousel-image" src="" alt="Carousel image">
+        </div>
+        <div class="carousel-prev" onclick="changeImage(-1)"><i class="fas fa-chevron-left"></i></div>
+        <div class="carousel-next" onclick="changeImage(1)"><i class="fas fa-chevron-right"></i></div>
+        <div class="carousel-close" onclick="closeCarousel()"><i class="fas fa-times"></i></div>
+    </div>
+
+    <footer class="bg-white mt-20 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500">&copy; 2024 Chromatography. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const images = [
+            "assets/1.jpg",
+            "assets/2.jpg",
+            "assets/3.jpg",
+            "assets/4.jpg",
+            "assets/5.jpg",
+            "assets/6.jpg",
+            "assets/7.jpg",
+            "assets/8.jpg",
+            "assets/9.jpg",
+            "assets/10.jpg",
+            "assets/11.jpg",
+            "assets/12.jpg",
+            "assets/13.jpg",
+            "assets/14.jpg",
+            "assets/15.jpg",
+            "assets/16.jpg",
+            "assets/20.jpg",
+            "assets/23.jpg",
+            "assets/22.jpg",
+            "assets/23.jpg",
+            "assets/24.jpg",
+            "assets/25.jpg",
+            "assets/26.jpg",
+            "assets/27.jpg"
+        ];
+        let currentIndex = 0;
+
+        function openCarousel(index) {
+            currentIndex = index;
+            document.getElementById('carousel-image').src = images[currentIndex];
+            document.getElementById('carousel').style.display = 'block';
+        }
+
+        function closeCarousel() {
+            document.getElementById('carousel').style.display = 'none';
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = images.length - 1;
+            if (currentIndex >= images.length) currentIndex = 0;
+            document.getElementById('carousel-image').src = images[currentIndex];
+        }
+
+        // Lens flare effect
+        const colors = ['#ff00ff', '#00ffff', '#ffff00', '#ff0000', '#00ff00', '#0000ff'];
+        const flares = [];
+        const heroSection = document.querySelector('.full-page');
+
+        // Create lens flares
+        for (let i = 0; i < 6; i++) {
+            const flare = document.createElement('div');
+            flare.classList.add('lens-flare');
+            const size = Math.random() * 2000 + 50;
+            flare.style.width = `${size}px`;
+            flare.style.height = `${size}px`;
+            flare.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            heroSection.appendChild(flare);
+            flares.push({ element: flare, size });
+        }
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        // Mousemove event to update mouse position
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+
+        // Animation function for spinning and translating flares
+        function animateFlares() {
+            flares.forEach((flareObj, index) => {
+                const { element: flare, size } = flareObj;
+                const speed = 1 / size * 100; // Inverse relationship: smaller size -> faster speed
+                const time = Date.now() * 0.001;
+
+                // Spinning animation
+                const spinX = Math.sin(time + index) * 100;
+                const spinY = Math.cos(time + index) * 100;
+
+                // Parallax effect with mouse position
+                const flareX = mouseX - flare.offsetWidth / 2 + spinX;
+                const flareY = mouseY - flare.offsetHeight / 2 + spinY;
+
+                flare.style.transform = `translate(${flareX * speed}px, ${flareY * speed}px)`;
+            });
+
+            requestAnimationFrame(animateFlares);
+        }
+
+        // Start the animation
+        animateFlares();
+
+    </script>
+</body>
+</html>
