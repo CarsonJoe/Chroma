@@ -24,11 +24,40 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            height: 10vh;
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 10vh;
+        }
+
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .navbar-link {
+            color: #4a5568;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-link:hover {
+            color: #1a202c;
         }
         .full-page {
             height: 90vh;
@@ -41,11 +70,39 @@
             position: relative;
             overflow: hidden;
         }
+        .gallery-header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+        }
+
+        .gallery-title {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
+        }
+
+        .gallery-subtitle {
+            font-size: 1.1rem;
+            color: #4a5568;
+        }
         .image-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             grid-gap: 2rem;
-            padding: 8rem 4rem;
+            padding: 4rem 0;
         }
         .image-item {
             overflow: hidden;
@@ -126,6 +183,49 @@
         .carousel-close:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+        .about-section {
+            background-color: #ffffff;
+            padding: 4rem 0;
+            margin-top: 4rem;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-header {
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .about-signature {
+            font-style: italic;
+            color: #718096;
+        }
         .lens-flare {
             position: absolute;
             border-radius: 50%;
@@ -135,7 +235,15 @@
             transition: transform 0.1s ease;
         }
         .hero {
-            font-size: clamp(1rem, 5vw, 5rem);
+            font-size: clamp(2rem, 10vw, 10rem);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        footer {
+            text-align: center;
         }
         .rainbow-text {
             background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff);
@@ -165,106 +273,133 @@
             opacity: 0.5;
             border-radius: 17px;
         }
+        body.carousel-open {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
 
     <main>
         <section class="full-page">
-            <h1 class="text-6xl font-bold mb-8 text-gray-800 rainbow-text">Chromatography</h1>
+            <h1 class="hero text-6xl font-bold mb-8 text-gray-800 rainbow-text">Chromatography</h1>
             <p class="text-xl text-gray-600 max-w-3xl relative z-10">
                 Nature Through a Chromatic Lens            </p>
-            <p class="text-xl text-gray-600 max-w-3xl relative z-10">
-                Welcome to Chromatography, where nature meets artistry. Our gallery showcases stunning plant photography enhanced with chromatic filters, creating a mesmerizing interplay of light and color. Each image captures the intricate details of flora, transformed into vibrant, dreamlike compositions that blur the line between reality and imagination.
-            </p>
+            
         </section>
 
         
         <nav class="navbar">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="flex justify-between items-center py-4">
-                    <div class="text-2xl font-bold rainbow-text">Chromatography</div>
-                    <div class="space-x-4">
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">Home</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">Gallery</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">About</a>
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300">Contact</a>
-                    </div>
+            <div class="navbar-container">
+                <div class="navbar-logo rainbow-text">Chromatography</div>
+                <div class="navbar-links">
+                    <a href="#" class="navbar-link">Home</a>
+                    <a href="#gallery" class="navbar-link">Gallery</a>
+                    <a href="#about" class="navbar-link">About</a>
+                    <a href="#" class="navbar-link">Shop</a>
                 </div>
             </div>
         </nav>
+        <section id="gallery" class="container">
+            
+            <div class="gallery-header">
+                <h2 class="gallery-title">Our Gallery</h2>
+                <p class="gallery-subtitle">Explore the vibrant world of unedited plant photography</p>
+            </div>
+            <div class="image-grid">
+                <div class="image-item rainbow-border">
+                    <img src="assets/1.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/2.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(1)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/3.jpg" alt="Chromatic plant photo 2" onclick="openCarousel(2)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/4.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(3)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/5.jpg" alt="Chromatic plant photo 3" onclick="openCarousel(4)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/6.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(5)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/7.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(6)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/8.jpg" alt="Chromatic plant photo 4" onclick="openCarousel(7)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/9.jpg" alt="Chromatic plant photo 5" onclick="openCarousel(8)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/10.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(9)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/11.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(10)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/12.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(11)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/13.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(12)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/14.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(13)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/15.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(14)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/16.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(15)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/20.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(16)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/21.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(17)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/22.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(18)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/24.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(19)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/25.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(20)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/26.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(21)">
+                </div>
+                <div class="image-item rainbow-border">
+                    <img src="assets/27.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(22)">
+                </div>
+            </div>
+        </section>
 
-        <div class="image-grid">
-            <div class="image-item rainbow-border">
-                <img src="assets/1.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
+        
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="about-header">About Chromatography</h2>
+                    <p class="about-text">
+                        Chromatography is a passion project born from the creative collaboration of siblings Carson and Mup Gragg from California. Our gallery showcases the breathtaking beauty of nature through a unique lens, capturing the intricate details and vibrant colors of plant life in their purest form.
+                    </p>
+                    <p class="about-text">
+                        What sets our work apart is the authenticity of each image. Every photograph in our collection is completely unedited, presenting nature in its raw, unfiltered splendor. Our aim is to reveal the inherent artistry of the natural world, demonstrating that the most captivating designs and color palettes are often found in the smallest details of plants and flowers.
+                    </p>
+                    <p class="about-text">
+                        Through Chromatography, we invite you to see the world around you with fresh eyes, to appreciate the subtle hues and intricate patterns that often go unnoticed. Our work is a testament to the incredible diversity and beauty of plant life, captured with passion and presented with integrity.
+                    </p>
+                    <p class="about-signature">
+                        - Carson and Mup Gragg
+                    </p>
+                </div>
             </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/2.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/3.jpg" alt="Chromatic plant photo 2" onclick="openCarousel(1)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/4.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/5.jpg" alt="Chromatic plant photo 3" onclick="openCarousel(2)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/6.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/7.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/8.jpg" alt="Chromatic plant photo 4" onclick="openCarousel(3)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/9.jpg" alt="Chromatic plant photo 5" onclick="openCarousel(4)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/10.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/11.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/12.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/13.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/14.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/15.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/16.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/20.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/21.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/22.jpg" alt="Chromatic plant photo 6" onclick="openCarousel(5)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/24.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/25.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/26.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-            <div class="image-item rainbow-border">
-                <img src="assets/27.jpg" alt="Chromatic plant photo 1" onclick="openCarousel(0)">
-            </div>
-        </div>
+        </section>
     </main>
 
     <div id="carousel" class="carousel">
@@ -276,7 +411,7 @@
         <div class="carousel-close" onclick="closeCarousel()"><i class="fas fa-times"></i></div>
     </div>
 
-    <footer class="bg-white mt-20 py-8">
+    <footer class="bg-white mt-20 py-8 text-center">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <p class="text-gray-500">&copy; 2024 Chromatography. All rights reserved.</p>
         </div>
@@ -301,9 +436,8 @@
             "assets/15.jpg",
             "assets/16.jpg",
             "assets/20.jpg",
-            "assets/23.jpg",
+            "assets/21.jpg",
             "assets/22.jpg",
-            "assets/23.jpg",
             "assets/24.jpg",
             "assets/25.jpg",
             "assets/26.jpg",
@@ -315,10 +449,12 @@
             currentIndex = index;
             document.getElementById('carousel-image').src = images[currentIndex];
             document.getElementById('carousel').style.display = 'block';
+            document.body.classList.add('carousel-open');
         }
 
         function closeCarousel() {
             document.getElementById('carousel').style.display = 'none';
+            document.body.classList.remove('carousel-open');
         }
 
         function changeImage(direction) {
@@ -327,6 +463,23 @@
             if (currentIndex >= images.length) currentIndex = 0;
             document.getElementById('carousel-image').src = images[currentIndex];
         }
+
+        // Keyboard controls for carousel
+        document.addEventListener('keydown', function(event) {
+            if (document.getElementById('carousel').style.display === 'block') {
+                switch(event.key) {
+                    case 'ArrowLeft':
+                        changeImage(-1);
+                        break;
+                    case 'ArrowRight':
+                        changeImage(1);
+                        break;
+                    case 'Escape':
+                        closeCarousel();
+                        break;
+                }
+            }
+        });
 
         // Lens flare effect
         const colors = ['#ff00ff', '#00ffff', '#ffff00', '#ff0000', '#00ff00', '#0000ff'];
@@ -375,6 +528,17 @@
 
             requestAnimationFrame(animateFlares);
         }
+
+         // Add smooth scrolling
+         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
         // Start the animation
         animateFlares();
